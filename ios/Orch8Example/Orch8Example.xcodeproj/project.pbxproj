@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* Orch8ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000001; };
+		A10000010000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000002; };
+		A10000010000000000000003 /* Orch8Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000003; };
+		A10000010000000000000004 /* StepHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000004; };
+		A10000010000000000000005 /* WorkflowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000005; };
+		A10000010000000000000006 /* WorkflowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006; };
+		A10000010000000000000007 /* ApprovalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007; };
+		A10000010000000000000008 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000008; };
+		A10000010000000000000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000009; };
+		A10000010000000000000014 /* workflows in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000013; };
+		A10000010000000000000013 /* Orch8Mobile in Frameworks */ = {isa = PBXBuildFile; productRef = A10000030000000000000001; };
+		B10000010000000000000001 /* WorkflowE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000020000000000000001; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B10000030000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A100000A0000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000070000000000000001;
+			remoteInfo = Orch8Example;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A10000020000000000000001 /* Orch8ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orch8ExampleApp.swift; sourceTree = "<group>"; };
+		A10000020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A10000020000000000000003 /* Orch8Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orch8Manager.swift; sourceTree = "<group>"; };
+		A10000020000000000000004 /* StepHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHandlers.swift; sourceTree = "<group>"; };
+		A10000020000000000000005 /* WorkflowListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowListView.swift; sourceTree = "<group>"; };
+		A10000020000000000000006 /* WorkflowDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowDetailView.swift; sourceTree = "<group>"; };
+		A10000020000000000000007 /* ApprovalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalView.swift; sourceTree = "<group>"; };
+		A10000020000000000000008 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		A10000020000000000000009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000020000000000000013 /* workflows */ = {isa = PBXFileReference; lastKnownFileType = folder; path = workflows; sourceTree = "<group>"; };
+		A10000040000000000000001 /* Orch8Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orch8Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10000020000000000000001 /* WorkflowE2ETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowE2ETests.swift; sourceTree = "<group>"; };
+		B10000040000000000000001 /* Orch8ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Orch8ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000050000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000013 /* Orch8Mobile in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10000050000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000060000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A10000060000000000000002 /* Orch8Example */,
+				B10000060000000000000001 /* Orch8ExampleUITests */,
+				A10000060000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000060000000000000002 /* Orch8Example */ = {
+			isa = PBXGroup;
+			children = (
+				A10000020000000000000001 /* Orch8ExampleApp.swift */,
+				A10000020000000000000002 /* ContentView.swift */,
+				A10000060000000000000003 /* Engine */,
+				A10000060000000000000004 /* Views */,
+				A10000060000000000000005 /* Resources */,
+				A10000020000000000000009 /* Assets.xcassets */,
+			);
+			path = Orch8Example;
+			sourceTree = "<group>";
+		};
+		A10000060000000000000003 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				A10000020000000000000003 /* Orch8Manager.swift */,
+				A10000020000000000000004 /* StepHandlers.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		A10000060000000000000004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A10000020000000000000005 /* WorkflowListView.swift */,
+				A10000020000000000000006 /* WorkflowDetailView.swift */,
+				A10000020000000000000007 /* ApprovalView.swift */,
+				A10000020000000000000008 /* BannerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A10000060000000000000005 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A10000020000000000000013 /* workflows */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A10000060000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000040000000000000001 /* Orch8Example.app */,
+				B10000040000000000000001 /* Orch8ExampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B10000060000000000000001 /* Orch8ExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B10000020000000000000001 /* WorkflowE2ETests.swift */,
+			);
+			path = Orch8ExampleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000070000000000000001 /* Orch8Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000090000000000000001 /* Build configuration list for PBXNativeTarget "Orch8Example" */;
+			buildPhases = (
+				A10000080000000000000001 /* Sources */,
+				A10000050000000000000001 /* Frameworks */,
+				A10000080000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Orch8Example;
+			packageProductDependencies = (
+				A10000030000000000000001 /* Orch8Mobile */,
+			);
+			productName = Orch8Example;
+			productReference = A10000040000000000000001 /* Orch8Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B10000070000000000000001 /* Orch8ExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10000090000000000000001 /* Build configuration list for PBXNativeTarget "Orch8ExampleUITests" */;
+			buildPhases = (
+				B10000080000000000000001 /* Sources */,
+				B10000050000000000000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B10000030000000000000002 /* PBXTargetDependency */,
+			);
+			name = Orch8ExampleUITests;
+			productName = Orch8ExampleUITests;
+			productReference = B10000040000000000000001 /* Orch8ExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A100000A0000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A10000070000000000000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					B10000070000000000000001 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = A10000070000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = A10000090000000000000002 /* Build configuration list for PBXProject "Orch8Example" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A10000060000000000000001;
+			packageReferences = (
+				A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */,
+			);
+			productRefGroup = A10000060000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000070000000000000001 /* Orch8Example */,
+				B10000070000000000000001 /* Orch8ExampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000080000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000009 /* Assets.xcassets in Resources */,
+				A10000010000000000000014 /* workflows in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000080000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000001 /* Orch8ExampleApp.swift in Sources */,
+				A10000010000000000000002 /* ContentView.swift in Sources */,
+				A10000010000000000000003 /* Orch8Manager.swift in Sources */,
+				A10000010000000000000004 /* StepHandlers.swift in Sources */,
+				A10000010000000000000005 /* WorkflowListView.swift in Sources */,
+				A10000010000000000000006 /* WorkflowDetailView.swift in Sources */,
+				A10000010000000000000007 /* ApprovalView.swift in Sources */,
+				A10000010000000000000008 /* BannerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10000080000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000010000000000000001 /* WorkflowE2ETests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B10000030000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000070000000000000001 /* Orch8Example */;
+			targetProxy = B10000030000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A100000C0000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A100000C0000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A100000C0000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Orch8Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Orch8 Example";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.orch8.example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A100000C0000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Orch8Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Orch8 Example";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.orch8.example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B100000C0000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.orch8.example.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Orch8Example;
+			};
+			name = Debug;
+		};
+		B100000C0000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.orch8.example.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Orch8Example;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000090000000000000001 /* Build configuration list for PBXNativeTarget "Orch8Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A100000C0000000000000003 /* Debug */,
+				A100000C0000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000090000000000000002 /* Build configuration list for PBXProject "Orch8Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A100000C0000000000000001 /* Debug */,
+				A100000C0000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10000090000000000000001 /* Build configuration list for PBXNativeTarget "Orch8ExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B100000C0000000000000001 /* Debug */,
+				B100000C0000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../engine/packages/swift";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A10000030000000000000001 /* Orch8Mobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */;
+			productName = Orch8Mobile;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = A100000A0000000000000001 /* Project object */;
+}

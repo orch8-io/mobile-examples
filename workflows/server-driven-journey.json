@@ -1,0 +1,22 @@
+{
+  "id": "10000000-0000-0000-0000-000000000006",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "server-driven-journey",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    { "type": "step", "id": "resolve_journey_variant", "handler": "resolve_journey_variant", "params": {}, "cancellable": true },
+    { "type": "step", "id": "present_remote_screen", "handler": "present_remote_screen", "params": { "screen_contract": "journey-screen-v1" }, "cancellable": true },
+    {
+      "type": "step",
+      "id": "collect_journey_action",
+      "handler": "collect_journey_action",
+      "params": {},
+      "cancellable": true,
+      "wait_for_input": { "prompt": "Continue this journey.", "timeout": 604800000, "store_as": "journey_action" }
+    },
+    { "type": "step", "id": "record_journey_outcome", "handler": "record_journey_outcome", "params": {}, "cancellable": true }
+  ],
+  "created_at": "2026-07-25T00:00:00Z"
+}

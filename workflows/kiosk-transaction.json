@@ -1,0 +1,16 @@
+{
+  "id": "10000000-0000-0000-0000-000000000004",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "kiosk-transaction",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    { "type": "step", "id": "validate_cart", "handler": "validate_cart", "params": {}, "cancellable": true },
+    { "type": "step", "id": "reserve_local_inventory", "handler": "reserve_local_inventory", "params": { "idempotency_key": "{{ instance_id }}:inventory" }, "cancellable": true },
+    { "type": "step", "id": "authorize_payment", "handler": "authorize_payment", "params": { "idempotency_key": "{{ instance_id }}:payment" }, "cancellable": false },
+    { "type": "step", "id": "persist_receipt", "handler": "persist_receipt", "params": {}, "cancellable": false },
+    { "type": "step", "id": "reconcile_transaction", "handler": "reconcile_transaction", "params": { "idempotency_key": "{{ instance_id }}:reconcile" }, "cancellable": true }
+  ],
+  "created_at": "2026-07-25T00:00:00Z"
+}

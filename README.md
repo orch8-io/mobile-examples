@@ -1,8 +1,36 @@
 # orch8.io Mobile Examples
 
-Example iOS (SwiftUI) and Android (Kotlin/Jetpack Compose) apps demonstrating the orch8.io mobile workflow engine. Each app runs **3 workflows with 10 steps each**, featuring wait states, approval gates, dynamic banners, and conditional routing — all visible in the orch8.io dashboard.
+Example iOS (SwiftUI) and Android (Kotlin/Jetpack Compose) apps demonstrating the orch8.io mobile workflow engine. Each app runs **3 reference workflows with 10 steps each**, featuring wait states, approval gates, dynamic banners, and conditional routing — all visible in the orch8.io dashboard. Six additional validated starter workflows cover field inspection, durable evidence capture, offline approval, kiosk recovery, private on-device AI, and server-driven journeys.
 
 ## Workflows
+
+### Opportunity starter pack
+
+The files below are production-oriented contracts, not mock native handlers.
+Each declares the handler names the host application must implement; see
+`opportunity-catalog.json` for the complete mapping and readiness boundaries.
+
+| Workflow | Product wedge | Safety boundary |
+|---|---|---|
+| `field-inspection.json` | Offline mission/inspection | Explicit checklist and signature waits |
+| `durable-capture.json` | Evidence and media upload | Persisted upload intent and idempotency key |
+| `offline-approval.json` | Human decisions | Signed decision before durable sync |
+| `kiosk-transaction.json` | POS/kiosk recovery | Separate idempotency keys for inventory, payment, reconciliation |
+| `private-ai-review.json` | Local/private AI | Local-only input plus approval before sharing |
+| `server-driven-journey.json` | Remotely configured journeys | Versioned native screen contract |
+
+Validate the starter pack against the current engine schema:
+
+```bash
+cd ../engine
+cargo run -p orch8-mobile --example validate_mobile_sequences -- \
+  ../mobile-examples/workflows/field-inspection.json \
+  ../mobile-examples/workflows/durable-capture.json \
+  ../mobile-examples/workflows/offline-approval.json \
+  ../mobile-examples/workflows/kiosk-transaction.json \
+  ../mobile-examples/workflows/private-ai-review.json \
+  ../mobile-examples/workflows/server-driven-journey.json
+```
 
 ### 1. User Onboarding (`onboarding-flow`)
 Profile init → email validation → **terms acceptance (wait)** → preferences → notifications → **admin approval (wait)** → welcome banner / rejection notice → completion

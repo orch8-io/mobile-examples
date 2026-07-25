@@ -1,0 +1,23 @@
+{
+  "id": "10000000-0000-0000-0000-000000000002",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "durable-capture",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    {
+      "type": "step",
+      "id": "capture_evidence",
+      "handler": "capture_evidence",
+      "params": { "media_types": ["photo", "video", "document"] },
+      "cancellable": true,
+      "wait_for_input": { "prompt": "Capture the required evidence.", "timeout": 86400000, "store_as": "evidence" }
+    },
+    { "type": "step", "id": "hash_evidence", "handler": "hash_evidence", "params": { "algorithm": "sha256" }, "cancellable": true },
+    { "type": "step", "id": "persist_upload_intent", "handler": "persist_upload_intent", "params": {}, "cancellable": true },
+    { "type": "step", "id": "upload_evidence", "handler": "upload_evidence", "params": { "idempotency_key": "{{ instance_id }}" }, "cancellable": true },
+    { "type": "step", "id": "confirm_remote_receipt", "handler": "confirm_remote_receipt", "params": {}, "cancellable": true }
+  ],
+  "created_at": "2026-07-25T00:00:00Z"
+}

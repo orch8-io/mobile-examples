@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "positioning": "Offline Mission Runtime",
+  "promise": "Durable mobile process state that resumes after connectivity and process interruptions when the host operating system grants execution time.",
+  "opportunities": [
+    {
+      "rank": 1,
+      "slug": "offline-mission-runtime",
+      "implementation": "workflows/field-inspection.json",
+      "status": "starter",
+      "required_handlers": ["open_assignment", "capture_observations", "validate_inspection", "capture_signature", "queue_sync"]
+    },
+    {
+      "rank": 2,
+      "slug": "confidential-continuity",
+      "implementation": "engine continuity capsule import, activation and secure-host-signed export APIs",
+      "status": "feature-gated-foundation",
+      "release_gate": "server-mobile-server reference-device acceptance matrix"
+    },
+    {
+      "rank": 3,
+      "slug": "durable-capture",
+      "implementation": "workflows/durable-capture.json",
+      "status": "starter",
+      "required_handlers": ["capture_evidence", "hash_evidence", "persist_upload_intent", "upload_evidence", "confirm_remote_receipt"]
+    },
+    {
+      "rank": 4,
+      "slug": "fleet-control-plane",
+      "implementation": "mobile sync reporter, command channel, telemetry and cloud mobile dashboard",
+      "status": "implemented"
+    },
+    {
+      "rank": 5,
+      "slug": "bounded-background-execution",
+      "implementation": "MobileEngine.runUntilIdle and Expo NativeEngine.runUntilIdle",
+      "status": "implemented",
+      "constraint": "BGTaskScheduler and WorkManager determine when execution is available"
+    },
+    {
+      "rank": 6,
+      "slug": "offline-approval",
+      "implementation": "workflows/offline-approval.json",
+      "status": "starter",
+      "required_handlers": ["prepare_decision", "collect_decision", "sign_decision", "queue_sync"]
+    },
+    {
+      "rank": 7,
+      "slug": "kiosk-transaction-recovery",
+      "implementation": "workflows/kiosk-transaction.json",
+      "status": "starter",
+      "required_handlers": ["validate_cart", "reserve_local_inventory", "authorize_payment", "persist_receipt", "reconcile_transaction"]
+    },
+    {
+      "rank": 8,
+      "slug": "private-on-device-ai",
+      "implementation": "workflows/private-ai-review.json",
+      "status": "starter",
+      "required_handlers": ["select_private_input", "run_local_model", "redact_result", "approve_summary", "record_local_provenance"]
+    },
+    {
+      "rank": 9,
+      "slug": "server-driven-journey",
+      "implementation": "workflows/server-driven-journey.json",
+      "status": "starter",
+      "required_handlers": ["resolve_journey_variant", "present_remote_screen", "collect_journey_action", "record_journey_outcome"]
+    },
+    {
+      "rank": 10,
+      "slug": "mobile-reliability-certification",
+      "implementation": "engine orch8-mobile test suites and validate_mobile_sequences example",
+      "status": "automated-foundation",
+      "release_gate": "physical-device kill, restart, offline, expiry and push matrix"
+    }
+  ]
+}

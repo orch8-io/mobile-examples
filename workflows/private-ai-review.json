@@ -1,0 +1,38 @@
+{
+  "id": "10000000-0000-0000-0000-000000000005",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "private-ai-review",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    {
+      "type": "step",
+      "id": "select_private_input",
+      "handler": "select_private_input",
+      "params": { "network_upload_allowed": false },
+      "cancellable": true,
+      "wait_for_input": { "prompt": "Select content to process locally.", "timeout": 86400000, "store_as": "private_input" }
+    },
+    { "type": "step", "id": "run_local_model", "handler": "run_local_model", "params": { "network_upload_allowed": false, "max_tokens": 512 }, "cancellable": true },
+    { "type": "step", "id": "redact_result", "handler": "redact_result", "params": { "policy": "local_only_fields" }, "cancellable": true },
+    {
+      "type": "step",
+      "id": "approve_summary",
+      "handler": "approve_summary",
+      "params": {},
+      "cancellable": true,
+      "wait_for_input": {
+        "prompt": "Approve the redacted summary for synchronization.",
+        "timeout": 86400000,
+        "choices": [
+          { "label": "Share summary", "value": "approved" },
+          { "label": "Keep local", "value": "local_only" }
+        ],
+        "store_as": "sharing_decision"
+      }
+    },
+    { "type": "step", "id": "record_local_provenance", "handler": "record_local_provenance", "params": {}, "cancellable": true }
+  ],
+  "created_at": "2026-07-25T00:00:00Z"
+}

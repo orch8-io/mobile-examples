@@ -1,0 +1,30 @@
+{
+  "id": "10000000-0000-0000-0000-000000000001",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "field-inspection",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    { "type": "step", "id": "open_assignment", "handler": "open_assignment", "params": {}, "cancellable": true },
+    {
+      "type": "step",
+      "id": "capture_observations",
+      "handler": "capture_observations",
+      "params": { "required": ["notes", "location", "condition"] },
+      "cancellable": true,
+      "wait_for_input": { "prompt": "Complete the inspection checklist.", "timeout": 86400000, "store_as": "observations" }
+    },
+    { "type": "step", "id": "validate_inspection", "handler": "validate_inspection", "params": {}, "cancellable": true },
+    {
+      "type": "step",
+      "id": "inspector_attestation",
+      "handler": "capture_signature",
+      "params": { "purpose": "inspection_attestation" },
+      "cancellable": true,
+      "wait_for_input": { "prompt": "Sign to attest that this inspection is complete.", "timeout": 86400000, "store_as": "attestation" }
+    },
+    { "type": "step", "id": "queue_inspection_sync", "handler": "queue_sync", "params": { "record_type": "inspection" }, "cancellable": true }
+  ],
+  "created_at": "2026-07-25T00:00:00Z"
+}

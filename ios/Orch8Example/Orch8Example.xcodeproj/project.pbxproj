@@ -202,7 +202,7 @@
 			);
 			mainGroup = A10000060000000000000001;
 			packageReferences = (
-				A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */,
+				A100000B0000000000000001 /* XCRemoteSwiftPackageReference "orch8-mobile-swift" */,
 			);
 			productRefGroup = A10000060000000000000006 /* Products */;
 			projectDirPath = "";
@@ -433,17 +433,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../engine/packages/swift";
+/* Begin XCRemoteSwiftPackageReference section */
+		A100000B0000000000000001 /* XCRemoteSwiftPackageReference "orch8-mobile-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orch8-io/orch8-mobile-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 0.7.1;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		A10000030000000000000001 /* Orch8Mobile */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A100000B0000000000000001 /* XCLocalSwiftPackageReference "../../../engine/packages/swift" */;
+			package = A100000B0000000000000001 /* XCRemoteSwiftPackageReference "orch8-mobile-swift" */;
 			productName = Orch8Mobile;
 		};
 /* End XCSwiftPackageProductDependency section */

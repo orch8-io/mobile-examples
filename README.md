@@ -93,21 +93,14 @@ mobile-examples/
 
 ### Prerequisites
 
-1. Build the orch8 mobile SDK (from repo root):
-   ```bash
-   cd engine
-   # iOS: build xcframework
-   cargo build -p orch8-mobile --target aarch64-apple-ios --release
-   # Android: build AAR
-   ./scripts/build-android-aar.sh --release
-   ```
-
-2. Or run the CI workflow (`.github/workflows/mobile.yml`) to produce artifacts.
+Android development requires a locally built AAR (or the artifact produced by
+`.github/workflows/mobile.yml`). The iOS example resolves the published binary
+Swift Package directly and does not require an engine checkout or Rust build.
 
 ### iOS
 
 1. Open `ios/Orch8Example/Orch8Example.xcodeproj` in Xcode
-2. The project references `engine/packages/swift` as a local SPM package — ensure the xcframework is built
+2. Let Xcode resolve `orch8-mobile-swift` version `0.7.1`
 3. Select a simulator or device target
 4. Build and run (Cmd+R)
 

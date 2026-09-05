@@ -1,7 +1,7 @@
 import Foundation
 import Orch8Mobile
 
-class ExampleStepHandler: StepHandler {
+final class ExampleStepHandler: StepHandler, @unchecked Sendable {
     private let handler: (String, String) -> String
 
     init(handler: @escaping (String, String) -> String) {
@@ -14,7 +14,7 @@ class ExampleStepHandler: StepHandler {
     }
 }
 
-class ExampleEngineListener: EngineListener {
+final class ExampleEngineListener: EngineListener, @unchecked Sendable {
     var onCompleted: ((String, String) -> Void)?
     var onFailed: ((String, String) -> Void)?
     var onPendingStep: ((String, String, String) -> Void)?

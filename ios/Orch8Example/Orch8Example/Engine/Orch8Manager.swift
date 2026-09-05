@@ -65,6 +65,7 @@ class Orch8Manager: ObservableObject {
     private var setupTask: Task<Void, Never>?
 
     static let sequencesUrl = "http://localhost:8080/sequences.json"
+    static let telemetryUrl = "http://localhost:8080/telemetry"
 
     static let workflowNames = [
         "onboarding-flow",
@@ -94,11 +95,15 @@ class Orch8Manager: ObservableObject {
             handlerTimeoutMs: 30000,
             operationTimeoutMs: 10000,
             telemetryEnabled: true,
+            telemetryUrl: Self.telemetryUrl,
             environment: "development",
             rootPublicKey: "",
             sdkVersion: "0.1.0",
             memoryBudgetBytes: 0,
-            sequencesUrl: Self.sequencesUrl
+            sequencesUrl: Self.sequencesUrl,
+            syncUrl: "",
+            deviceId: "",
+            syncApiKey: ""
         )
 
         engineInfo = "tick=\(config.tickIntervalMs)ms | concurrent=\(config.maxConcurrentSteps) steps, \(config.maxConcurrentInstances) instances | timeout=\(config.handlerTimeoutMs / 1000)s | env=\(config.environment)"
@@ -132,7 +137,7 @@ class Orch8Manager: ObservableObject {
                 appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0",
                 sdkVersion: "0.1.0"
             )
-            try eng.setDeviceContext(context: context)
+            eng.setDeviceContext(ctx: context)
             fputs("[app] Device context set: \(context.osName) \(context.osVersion), app \(context.appVersion)\n", stderr)
 
             setupBatteryMonitoring(engine: eng)
@@ -165,8 +170,10 @@ class Orch8Manager: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            guard let engine = self?.engine else { return }
-            self?.reportCurrentBatteryState(engine: engine)
+            Task { @MainActor [weak self] in
+                guard let self, let engine = self.engine else { return }
+                self.reportCurrentBatteryState(engine: engine)
+            }
         }
 
         let levelObserver = NotificationCenter.default.addObserver(
@@ -174,8 +181,10 @@ class Orch8Manager: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            guard let engine = self?.engine else { return }
-            self?.reportCurrentBatteryState(engine: engine)
+            Task { @MainActor [weak self] in
+                guard let self, let engine = self.engine else { return }
+                self.reportCurrentBatteryState(engine: engine)
+            }
         }
 
         batteryObservers = [stateObserver, levelObserver]
@@ -202,12 +211,8 @@ class Orch8Manager: ObservableObject {
             powerState = .unplugged
         }
 
-        do {
-            try engine.reportPowerState(state: powerState)
-            fputs("[app] Reported power state: \(powerState), battery level: \(level)\n", stderr)
-        } catch {
-            fputs("[app] Failed to report power state: \(error)\n", stderr)
-        }
+        engine.reportPowerState(state: powerState)
+        fputs("[app] Reported power state: \(powerState), battery level: \(level)\n", stderr)
     }
 
     private func refreshLoadedSequences(engine: MobileEngine) {
@@ -295,13 +300,15 @@ class Orch8Manager: ObservableObject {
         let generatedDedupKey = dedupKey ?? "\(name)-\(UUID().uuidString.prefix(8))"
         let now = ISO8601DateFormatter().string(from: Date())
 
-        Task.detached { [weak self] in
+        Task { [weak self] in
             do {
-                let instanceId = try engine.start(
-                    sequenceName: name,
-                    input: inputJson,
-                    dedupKey: generatedDedupKey
-                )
+                let instanceId = try await Task.detached {
+                    try engine.start(
+                        sequenceName: name,
+                        input: inputJson,
+                        dedupKey: generatedDedupKey
+                    )
+                }.value
                 let status = WorkflowStatus(
                     id: instanceId,
                     name: name,
@@ -311,19 +318,15 @@ class Orch8Manager: ObservableObject {
                     dedupKey: generatedDedupKey,
                     createdAt: now
                 )
-                await MainActor.run {
-                    self?.activeWorkflows.append(status)
-                }
+                self?.activeWorkflows.append(status)
                 fputs("[app] Started workflow '\(name)' instance=\(instanceId) dedup=\(generatedDedupKey)\n", stderr)
             } catch {
                 fputs("[app] Failed to start workflow '\(name)': \(error)\n", stderr)
-                await MainActor.run {
-                    self?.activeBanner = BannerInfo(
-                        title: "Error",
-                        message: "Failed to start \(name): \(error.localizedDescription)",
-                        style: .error
-                    )
-                }
+                self?.activeBanner = BannerInfo(
+                    title: "Error",
+                    message: "Failed to start \(name): \(error.localizedDescription)",
+                    style: .error
+                )
             }
         }
     }
@@ -385,12 +388,8 @@ class Orch8Manager: ObservableObject {
 
     func pauseEngine() {
         guard let engine = engine else { return }
-        do {
-            try engine.pause()
-            fputs("[app] Engine paused\n", stderr)
-        } catch {
-            fputs("[app] Failed to pause engine: \(error)\n", stderr)
-        }
+        engine.pause()
+        fputs("[app] Engine paused\n", stderr)
     }
 
     func resumeEngine() {
@@ -405,8 +404,8 @@ class Orch8Manager: ObservableObject {
 
         guard let engine = engine else { return }
         do {
-            try engine.flushTelemetry()
-            try engine.shutdown()
+            _ = try engine.flushTelemetry(endpointUrl: Self.telemetryUrl)
+            engine.shutdown()
             fputs("[app] Engine shut down\n", stderr)
         } catch {
             fputs("[app] Failed to shut down engine: \(error)\n", stderr)
@@ -420,22 +419,14 @@ class Orch8Manager: ObservableObject {
 
     func reportPowerState(_ state: PowerState) {
         guard let engine = engine else { return }
-        do {
-            try engine.reportPowerState(state: state)
-            fputs("[app] Manually reported power state: \(state)\n", stderr)
-        } catch {
-            fputs("[app] Failed to report power state: \(error)\n", stderr)
-        }
+        engine.reportPowerState(state: state)
+        fputs("[app] Manually reported power state: \(state)\n", stderr)
     }
 
     func onPushReceived() {
         guard let engine = engine else { return }
-        do {
-            try engine.onPushReceived()
-            fputs("[app] Push received — forced immediate sync\n", stderr)
-        } catch {
-            fputs("[app] Failed to handle push: \(error)\n", stderr)
-        }
+        engine.onPushReceived()
+        fputs("[app] Push received — forced immediate sync\n", stderr)
     }
 
     func getLoadedSequences() -> [SequenceInfo] {
@@ -448,7 +439,7 @@ class Orch8Manager: ObservableObject {
         }
     }
 
-    func getInstanceDetail(instanceId: String) -> InstanceSummary? {
+    func getInstanceDetail(instanceId: String) -> InstanceState? {
         guard let engine = engine else { return nil }
         do {
             return try engine.getInstance(instanceId: instanceId)

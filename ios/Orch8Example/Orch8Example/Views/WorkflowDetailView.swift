@@ -60,7 +60,7 @@ struct WorkflowDetailView: View {
                 Button {
                     if let summary = orchestrator.getInstanceDetail(instanceId: workflow.id) {
                         refreshedState = "\(summary.state)"
-                        refreshedStep = summary.currentStep
+                        refreshedStep = workflow.currentStep
                     }
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")

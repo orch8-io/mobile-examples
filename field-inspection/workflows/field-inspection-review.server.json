@@ -1,0 +1,56 @@
+{
+  "id": "10000000-0000-0000-0000-000000000012",
+  "tenant_id": "mobile",
+  "namespace": "default",
+  "name": "field-inspection-review",
+  "version": 1,
+  "deprecated": false,
+  "blocks": [
+    {
+      "type": "step",
+      "id": "supervisor_review",
+      "handler": "human_review",
+      "params": {
+        "reviewer": "{{context.data.supervisor_id}}",
+        "instructions": "Inspection {{context.data.inspection_id}} at site {{context.data.site_id}} by {{context.data.inspector}}: {{context.data.failed_count}} failed item(s), {{context.data.photo_count}} photo(s). Approve, request changes, or reject.",
+        "review_data": {
+          "inspection_id": "{{context.data.inspection_id}}",
+          "site_id": "{{context.data.site_id}}",
+          "summary": "{{context.data.summary}}",
+          "evidence_refs": "{{context.data.evidence_refs}}"
+        },
+        "notify_url": "https://push-relay.example.com/orch8/supervisor-review",
+        "notify_headers": { "Authorization": "credentials://supervisor-push-relay/token" }
+      },
+      "wait_for_input": {
+        "prompt": "Approve this field inspection?",
+        "timeout": 604800000,
+        "choices": [
+          { "label": "Approve", "value": "approved" },
+          { "label": "Request changes", "value": "changes_requested" },
+          { "label": "Reject", "value": "rejected" }
+        ],
+        "store_as": "decision",
+        "allow_comment": true
+      }
+    },
+    {
+      "type": "step",
+      "id": "relay_decision_to_device",
+      "handler": "http_request",
+      "params": {
+        "method": "POST",
+        "url": "https://orch8.example.com/mobile/commands",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-API-Key": "credentials://orch8-mobile-commands/api_key",
+          "X-Tenant-Id": "mobile"
+        },
+        "body": "{\"device_id\":\"{{context.data.device_id}}\",\"command_type\":\"complete_step\",\"payload\":{\"instance_id\":\"{{context.data.device_instance_id}}\",\"block_id\":\"supervisor_approval\",\"step_name\":\"supervisor_approval\",\"output\":{\"value\":\"{{context.data.decision}}\"}}}",
+        "timeout_ms": 10000
+      },
+      "retry": { "max_attempts": 6, "initial_backoff": 2000, "max_backoff": 300000, "backoff_multiplier": 2.0 }
+    }
+  ],
+  "created_at": "2026-09-26T00:00:00Z"
+}

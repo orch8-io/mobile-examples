@@ -2,6 +2,16 @@
 
 Example iOS (SwiftUI) and Android (Kotlin/Jetpack Compose) apps demonstrating the orch8.io mobile workflow engine. Each app runs **3 reference workflows with 10 steps each**, featuring wait states, approval gates, dynamic banners, and conditional routing — all visible in the orch8.io dashboard. Six additional validated starter workflows cover field inspection, durable evidence capture, offline approval, kiosk recovery, private on-device AI, and server-driven journeys.
 
+## Expo reference app
+
+[`field-inspection/`](field-inspection/) is an Expo (React Native) app built
+on [`@orch8.io/expo`](https://github.com/orch8-io/sdk-expo). The inspector
+fills an offline checklist and attaches photos as content-hash artifact refs.
+The workflow runs on the device, syncs when a connection returns, and waits
+for a push-notified supervisor approval from a server-side `human_review`
+companion sequence. The folder also has a store-listing and privacy
+checklist.
+
 ## Workflows
 
 ### Opportunity starter pack

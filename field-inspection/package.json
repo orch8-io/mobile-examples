@@ -1,0 +1,34 @@
+{
+  "name": "orch8-field-inspection",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline field-inspection reference app: Expo + @orch8.io/expo on-device workflow engine",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "prebuild": "expo prebuild",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test src/lib/*.test.ts"
+  },
+  "dependencies": {
+    "@orch8.io/expo": "^0.7.0",
+    "@react-native-community/netinfo": "11.4.1",
+    "expo": "~52.0.49",
+    "expo-background-fetch": "~13.0.6",
+    "expo-crypto": "~14.0.2",
+    "expo-device": "~7.0.3",
+    "expo-file-system": "~18.0.12",
+    "expo-image-picker": "~16.0.6",
+    "expo-notifications": "~0.29.14",
+    "expo-status-bar": "~2.0.1",
+    "expo-task-manager": "~12.0.6",
+    "react": "18.3.1",
+    "react-native": "0.76.9"
+  },
+  "devDependencies": {
+    "@types/react": "~18.3.12",
+    "typescript": "~5.3.3"
+  }
+}

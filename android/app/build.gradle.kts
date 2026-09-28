@@ -41,9 +41,9 @@ android {
 }
 
 dependencies {
-    // Orch8 Mobile SDK (local AAR — see README for build instructions)
-    implementation(files("libs/orch8-mobile-release.aar"))
-    implementation("net.java.dev.jna:jna:5.15.0@aar")
+    // Orch8 Mobile SDK from Orch8's Maven repository (declared in
+    // settings.gradle.kts). Its POM brings JNA and kotlinx-coroutines.
+    implementation("io.orch8:orch8-mobile:0.7.1")
 
     // AndroidX + Compose
     implementation("androidx.core:core-ktx:1.15.0")

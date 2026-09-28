@@ -103,9 +103,10 @@ mobile-examples/
 
 ### Prerequisites
 
-Android development requires a locally built AAR (or the artifact produced by
-`.github/workflows/mobile.yml`). The iOS example resolves the published binary
-Swift Package directly and does not require an engine checkout or Rust build.
+Neither example needs an engine checkout or a Rust build. The iOS example
+resolves the published binary Swift Package; the Android example resolves the
+published AAR (`io.orch8:orch8-mobile:0.7.1`) from Orch8's Maven repository.
+Android needs JDK 17 and the Android SDK (compileSdk 35).
 
 ### iOS
 
@@ -116,14 +117,33 @@ Swift Package directly and does not require an engine checkout or Rust build.
 
 ### Android
 
-1. Copy the built AAR to `android/app/libs/`:
-   ```bash
-   mkdir -p android/app/libs
-   cp ../engine/packages/android/orch8-mobile/build/outputs/aar/orch8-mobile-release.aar android/app/libs/
+1. Open `android/` in Android Studio (or run `./gradlew :app:assembleDebug`
+   with Gradle 8.9).
+2. Sync Gradle. `settings.gradle.kts` declares Orch8's Maven repository and
+   `app/build.gradle.kts` depends on the published AAR, whose POM brings JNA and
+   kotlinx-coroutines:
+
+   ```kotlin
+   // settings.gradle.kts
+   dependencyResolutionManagement {
+       repositories {
+           google()
+           mavenCentral()
+           maven("https://raw.githubusercontent.com/orch8-io/maven/main")
+       }
+   }
+
+   // app/build.gradle.kts
+   dependencies {
+       implementation("io.orch8:orch8-mobile:0.7.1")
+   }
    ```
-2. Open `android/` in Android Studio
-3. Sync Gradle
-4. Run on emulator or device
+3. Run on an emulator or device. The APK carries `liborch8_mobile.so` for
+   `arm64-v8a`, `armeabi-v7a` and `x86_64`.
+
+To try an unreleased engine, publish a locally built AAR into a directory with
+`scripts/publish-maven-aar.py --repo <dir> --version <v> --aar <aar>` from the
+engine repository, then add `maven(uri("<dir>"))` before the Orch8 repository.
 
 ## MobileEngine API Reference
 
@@ -570,6 +590,48 @@ class MyFirebaseService : FirebaseMessagingService() {
 ```
 
 The example app also handles push notification taps via intent extras — if the intent contains an `orch8_instance_id` extra, it calls `onPushReceived()` to force a sync.
+
+## Runtime node (next engine release)
+
+> Needs the Orch8 engine release after `0.7.1`. The `0.7.1` Swift package and
+> AAR used by these examples do not contain these calls; bump both pins to
+> that release before trying them.
+
+A phone can join the distributed-execution mesh as a runtime of kind `mobile`
+and run server-placed steps with the app's native handlers. The worker loop
+runs inside the engine: it polls with the device's runtime id, heartbeats per
+lease, and completes, fails or releases each task. Handler params carry a
+reserved `__orch8` member; send `__orch8.effect_id` to downstream APIs as the
+idempotency key. Server placement uses `params.$runtime` (for example
+`{"runtime_kinds": ["mobile"]}` or a specific `runtime_id`). Registration uses
+`syncUrl`, `deviceId` and `syncApiKey` from the engine config.
+
+### iOS
+
+```swift
+try engine.registerHandler(name: "scan_document", handler: ScanHandler())
+let node = Orch8RuntimeNode(engine: engine)
+try await node.join(capabilities: NodeCapabilities(hardware: ["camera"], pushToken: apnsToken))
+try node.startWorker()
+
+// Silent push (id-only wake hint): poll for the leased task now.
+node.handlePush(userInfo: userInfo)
+// BGProcessingTask / push-wake window:
+let window = try await node.runBackgroundWindow(seconds: 25)
+```
+
+### Android
+
+```kotlin
+engine.registerHandler("scan_document", ScanHandler())
+engine.registerNode(NodeCapabilities(hardware = listOf("camera"), pushToken = fcmToken))
+engine.startWorker(WorkerOptions())
+
+// FirebaseMessagingService.onMessageReceived: id-only wake hint.
+engine.onPushWake(JSONObject(message.data as Map<*, *>).toString())
+// WorkManager window:
+val window = engine.runWorkerWindow(25_000uL)
+```
 
 ## How It Works
 

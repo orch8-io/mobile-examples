@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import io.orch8.mobile.DeviceContext
 import io.orch8.mobile.EngineListener
+import io.orch8.mobile.InstanceState
 import io.orch8.mobile.InstanceSummary
 import io.orch8.mobile.MobileEngine
 import io.orch8.mobile.MobileEngineConfig
@@ -170,7 +171,12 @@ class Orch8Manager(private val context: Context) {
             rootPublicKey = "",
             sdkVersion = "0.1.0",
             memoryBudgetBytes = 0u,
-            sequencesUrl = SEQUENCES_URL
+            sequencesUrl = SEQUENCES_URL,
+            // Telemetry delivery and server sync are off in this example.
+            telemetryUrl = "",
+            syncUrl = "",
+            deviceId = getOrCreateDeviceId(),
+            syncApiKey = "",
         )
 
         try {
@@ -354,10 +360,7 @@ class Orch8Manager(private val context: Context) {
     }
 
     fun shutdownEngine() {
-        engine?.let { eng ->
-            eng.flushTelemetry()
-            eng.shutdown()
-        }
+        engine?.shutdown()
         engine = null
         android.util.Log.i("Orch8Manager", "Engine shut down")
     }
@@ -382,7 +385,7 @@ class Orch8Manager(private val context: Context) {
         return engine?.loadedSequences() ?: emptyList()
     }
 
-    fun getInstanceDetail(instanceId: String): InstanceSummary? {
+    fun getInstanceDetail(instanceId: String): InstanceState? {
         return try {
             engine?.getInstance(instanceId)
         } catch (e: Exception) {
